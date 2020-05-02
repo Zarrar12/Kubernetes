@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: hello-deployment
+ labels:
+   role: app
+spec:
+ replicas: 2
+ selector:
+   matchLabels:
+     role: app
+ template:
+   metadata:
+     labels:
+       role: app
+   spec:
+     containers:
+     - name: flask
+       image: qasim683/flask:latest
+     - name: nginx
+       image: qasim683/nginx:latest 
+       ports:
+       - containerPort: 80
+       volumeMounts:
+       - name: nginx-proxy-config
+         mountPath: /etc/nginx/nginx.conf
+         subPath: nginx.conf
+     volumes:
+     - name: nginx-proxy-config
+       configMap:
+         name: mc3-nginx-conf
