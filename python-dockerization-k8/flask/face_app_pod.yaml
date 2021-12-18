@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: face-app-pod
+  labels:
+    app: face-app
+spec:
+  containers:
+    - name: my-face-app
+      image: mhassan0992/face_recog_app:first
+      ports:
+        - containerPort: 2020
